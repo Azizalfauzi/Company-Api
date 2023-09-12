@@ -1,6 +1,6 @@
 # User API Spec
 
-## Register User Api
+## Register User Api Admin
 
 Endpoint : POST api/company/users
 

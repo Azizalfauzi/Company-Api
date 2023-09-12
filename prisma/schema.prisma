@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  username String    @id @db.VarChar(100)
+  password String    @db.VarChar(100)
+  name     String    @db.VarChar(100)
+  role     String    @db.VarChar(100)
+  token    String?   @db.VarChar(100)
+  profiles Profile[]
+
+  @@map("users")
+}
+
+model Profile {
+  id         Int     @id @default(autoincrement())
+  first_name String  @db.VarChar(100)
+  last_name  String? @db.VarChar(100)
+  email      String? @db.VarChar(200)
+  phone      String? @db.VarChar(20)
+  username   String  @db.VarChar(100)
+  user       User    @relation(fields: [username], references: [username])
+  blog       Blog[]
+
+  @@map("profiles")
+}
+
+model Blog {
+  id          Int     @id @default(autoincrement())
+  title       String @db.VarChar(100)
+  subtitle    String? @db.VarChar(100)
+  description String? @db.VarChar(255)
+  profile_id Int
+  profile    Profile @relation(fields: [profile_id], references: [id])
+
+  @@map("blogs")
+}

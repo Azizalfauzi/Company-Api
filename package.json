@@ -2,7 +2,7 @@
   "name": "company-api",
   "version": "1.0.0",
   "description": "Creating api company",
-  "main": "index.js",
+  "main": "main.js",
   "type": "module",
   "scripts": {
     "test": "jest"

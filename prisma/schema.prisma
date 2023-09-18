@@ -36,11 +36,11 @@ model Profile {
 
 model Blog {
   id          Int     @id @default(autoincrement())
-  title       String @db.VarChar(100)
+  title       String  @db.VarChar(100)
   subtitle    String? @db.VarChar(100)
   description String? @db.VarChar(255)
-  profile_id Int
-  profile    Profile @relation(fields: [profile_id], references: [id])
+  profile_id  Int
+  profile     Profile @relation(fields: [profile_id], references: [id])
 
   @@map("blogs")
 }

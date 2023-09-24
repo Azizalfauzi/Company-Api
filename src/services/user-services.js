@@ -21,6 +21,7 @@ const register = async (request) => {
   return prismaClient.user.create({
     data: user,
     select: {
+      id: true,
       username: true,
       name: true,
       role: true,

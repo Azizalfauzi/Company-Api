@@ -13,14 +13,14 @@ describe("Register POST /api/users", () => {
       username: "test",
       password: "rahasia",
       name: "test",
-      role: "admin",
+      role: "ADMIN",
     });
-
     expect(result.status).toBe(200);
     expect(result.body.data.username).toBe("test");
     expect(result.body.data.name).toBe("test");
-    expect(result.body.data.role).toBe("admin");
+    expect(result.body.data.role).toBe("ADMIN");
     expect(result.body.data.password).toBeUndefined();
+    console.info(result.body);
   });
 
   it("should error register new user ", async () => {
@@ -39,18 +39,18 @@ describe("Register POST /api/users", () => {
       username: "test",
       password: "rahasia",
       name: "test",
-      role: "admin",
+      role: "ADMIN",
     });
     expect(result.status).toBe(200);
     expect(result.body.data.username).toBe("test");
     expect(result.body.data.name).toBe("test");
-    expect(result.body.data.role).toBe("admin");
+    expect(result.body.data.role).toBe("ADMIN");
     expect(result.body.data.password).toBeUndefined();
     result = await supertest(web).post("/api/users").send({
       username: "test",
       password: "rahasia",
       name: "test",
-      role: "admin",
+      role: "ADMIN",
     });
     console.info(result.status);
     console.info(result.body);

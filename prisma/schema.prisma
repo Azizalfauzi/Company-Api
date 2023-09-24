@@ -11,36 +11,50 @@ datasource db {
 }
 
 model User {
-  username String    @id @db.VarChar(100)
-  password String    @db.VarChar(100)
-  name     String    @db.VarChar(100)
-  role     String    @db.VarChar(100)
-  token    String?   @db.VarChar(100)
-  profiles Profile[]
+  id        Int        @id @default(autoincrement())
+  username  String     @db.VarChar(100)
+  password  String     @db.VarChar(100)
+  name      String     @db.VarChar(100)
+  role      Role       @default(USER)
+  token     String?    @db.VarChar(100)
+  employees Employee[]
 
   @@map("users")
 }
 
-model Profile {
-  id         Int     @id @default(autoincrement())
-  first_name String  @db.VarChar(100)
-  last_name  String? @db.VarChar(100)
-  email      String? @db.VarChar(200)
-  phone      String? @db.VarChar(20)
-  username   String  @db.VarChar(100)
-  user       User    @relation(fields: [username], references: [username])
-  blog       Blog[]
+enum Role {
+  USER
+  ADMIN
+}
 
-  @@map("profiles")
+model Employee {
+  id         Int      @id @default(autoincrement())
+  first_name String   @db.VarChar(100)
+  last_name  String?  @db.VarChar(100)
+  email      String?  @db.VarChar(200)
+  address    String?  @db.VarChar(200)
+  position   Position @default(STAFF)
+  phone      String?  @db.VarChar(20)
+  user_id    Int
+  user       User     @relation(fields: [user_id], references: [id])
+  blogs      Blog[]
+
+  @@map("employees")
+}
+
+enum Position {
+  HRD
+  STAFF
+  DIRECTOR
 }
 
 model Blog {
-  id          Int     @id @default(autoincrement())
-  title       String  @db.VarChar(100)
-  subtitle    String? @db.VarChar(100)
-  description String? @db.VarChar(255)
-  profile_id  Int
-  profile     Profile @relation(fields: [profile_id], references: [id])
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(100)
+  subtitle    String?  @db.VarChar(100)
+  description String?  @db.VarChar(255)
+  employee_id Int
+  employee    Employee @relation(fields: [employee_id], references: [id])
 
   @@map("blogs")
 }

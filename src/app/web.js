@@ -1,5 +1,5 @@
 import express from "express";
-import { publicRouter } from "../routes/public-api";
+import { publicRouter } from "../routes/public-api.js";
 import { errorMiddleware } from "../middleware/error-middleware.js";
 import { authMiddleware } from "../middleware/auth-middleware.js";
 import { userRouter } from "../routes/api.js";

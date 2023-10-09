@@ -129,4 +129,6 @@ const update = async (request) => {
   });
 };
 
+const logout = async (request) => {};
+
 export default { register, login, get, update };

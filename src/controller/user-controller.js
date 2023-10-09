@@ -22,4 +22,17 @@ const login = async (req, res, next) => {
   }
 };
 
-export default { register, login };
+const get = async (req, res, next) => {
+  try {
+    const username = req.user.username;
+    const result = await userServices.get(username);
+    res.status(200).json({
+      messages: "Berhasil get user",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { register, login, get };

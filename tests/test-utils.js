@@ -36,3 +36,25 @@ export const removeTestEmployee = async () => {
     },
   });
 };
+
+export const createTestEmployee = async () => {
+  await prismaClient.employee.create({
+    data: {
+      username: "test",
+      first_name: "test",
+      last_name: "test",
+      email: "test@gmail.com",
+      address: "Jl.Test",
+      position: "HRD",
+      phone: "08223",
+    },
+  });
+};
+
+export const getTestEmployee = async () => {
+  return await prismaClient.employee.findFirst({
+    where: {
+      username: "test",
+    },
+  });
+};

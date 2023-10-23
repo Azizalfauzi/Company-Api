@@ -13,5 +13,6 @@ userRouter.patch("/api/users/current", userController.update);
 userRouter.delete("/api/users/logout", userController.logout);
 //Employee Api
 userRouter.post("/api/employee", employeeController.create);
+userRouter.get("/api/employee/:employeeId", employeeController.get);
 
 export { userRouter };

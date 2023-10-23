@@ -9,4 +9,6 @@ const createEmployeeValidation = Joi.object({
   phone: Joi.string().max(20),
 });
 
-export { createEmployeeValidation };
+const getEmployeeValidation = Joi.number().positive().required();
+
+export { createEmployeeValidation, getEmployeeValidation };

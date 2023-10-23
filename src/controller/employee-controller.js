@@ -14,6 +14,21 @@ const create = async (req, res, next) => {
   }
 };
 
+const get = async (req, res, next) => {
+  try {
+    const user = req.user;
+    const employeeId = req.params.employeeId;
+
+    const result = await employeeServices.get(user, employeeId);
+    res.status(200).json({
+      message: "Success get data employee",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 export default {
   create,
+  get,
 };

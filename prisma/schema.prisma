@@ -31,12 +31,12 @@ model Employee {
   id         Int      @id @default(autoincrement())
   first_name String   @db.VarChar(100)
   last_name  String?  @db.VarChar(100)
-  email      String?  @db.VarChar(200)
-  address    String?  @db.VarChar(200)
+  email      String?  @db.VarChar(100)
+  address    String?  @db.VarChar(255)
   position   Position @default(STAFF)
   phone      String?  @db.VarChar(20)
-  user_id    Int
-  user       User     @relation(fields: [user_id], references: [id])
+  username   String   @db.VarChar(100)
+  user       User     @relation(fields: [username], references: [username])
   blogs      Blog[]
 
   @@map("employees")

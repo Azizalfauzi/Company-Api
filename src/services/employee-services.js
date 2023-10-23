@@ -1,6 +1,7 @@
 import {
   createEmployeeValidation,
   getEmployeeValidation,
+  updateEmployeeValidation,
 } from "../validation/employee-validation.js";
 import { validate } from "../validation/validation.js";
 import { prismaClient } from "../app/database.js";
@@ -46,7 +47,45 @@ const get = async (user, request) => {
   }
   return employee;
 };
+
+const update = async (user, request) => {
+  const employee = validate(updateEmployeeValidation, request);
+  const totalCountInDatabase = await prismaClient.employee.count({
+    where: {
+      username: user.username,
+      id: employee.id,
+    },
+  });
+
+  if (totalCountInDatabase !== 1) {
+    throw new ResponseError(404, "Employee not found!");
+  }
+
+  return prismaClient.employee.update({
+    where: {
+      id: employee.id,
+    },
+    data: {
+      first_name: employee.first_name,
+      last_name: employee.last_name,
+      email: employee.email,
+      address: employee.address,
+      position: employee.position,
+      phone: employee.phone,
+    },
+    select: {
+      id: true,
+      first_name: true,
+      last_name: true,
+      email: true,
+      address: true,
+      position: true,
+      phone: true,
+    },
+  });
+};
 export default {
   create,
   get,
+  update,
 };

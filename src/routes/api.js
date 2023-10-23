@@ -14,5 +14,6 @@ userRouter.delete("/api/users/logout", userController.logout);
 //Employee Api
 userRouter.post("/api/employee", employeeController.create);
 userRouter.get("/api/employee/:employeeId", employeeController.get);
+userRouter.put("/api/employee/:employeeId", employeeController.update);
 
 export { userRouter };
